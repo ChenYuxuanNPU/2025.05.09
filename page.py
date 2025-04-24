@@ -196,7 +196,6 @@ with st.sidebar:
     )
 
     with st.container(border=True):
-
         st.markdown("<h5>任务一</h5>", unsafe_allow_html=True)
         st.checkbox("1.标题更换")
         st.write("将网页中的标题换成：颜乐天纪念中学——开学活动")
@@ -224,7 +223,7 @@ with left:
 
 with right:
     with st.container(border=True, height=850):
-        with st.container(border=False,height=675):
+        with st.container(border=False, height=675):
             st.markdown(st.session_state.new_code_0, unsafe_allow_html=True)
 
         st.number_input("请输入您的学号：", min_value=0, max_value=60, step=1, key="student_number",
@@ -235,7 +234,6 @@ with right:
                   kwargs={
                       "code": st.session_state.new_code_0, "route": f"代码/{st.session_state.new_student_number}"
                   })
-
 
 # with st.container(border=True):
 #     st.markdown(
