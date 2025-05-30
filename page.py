@@ -269,36 +269,54 @@ with right:
 #         , unsafe_allow_html=True)
 
 
-with st.expander(label="课程资源（点击展开）"):
+with st.expander(label="编码转换器（点击展开）", expanded=False):
     img_file = st.file_uploader(label="请选择文件", help="选择图像文件并返回带有对应base64编码的img标签",
                                 type=['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'])
     if img_file is not None:
-        img_left, img_right = st.columns(spec=2)
+        # img_left, img_right = st.columns(spec=2)
+        #
+        # with img_left:
+        #     with st.container(border=True, height=630):
+        #         st.markdown(
+        #             body=f"<h2 style='text-align: center;'>原始图像</h2>",
+        #             unsafe_allow_html=True
+        #         )
+        #         st.image(img_file, use_container_width=True)
+        #
+        # with img_right:
+        #     with st.container(border=True, height=630):
+        #         st.markdown(
+        #             body=f"<h2 style='text-align: center;'>对应的base64编码</h2><br><p style='text-align: center;'>快速三次点击下面的文本可以全选img标签，ctrl+c复制</p>",
+        #             unsafe_allow_html=True
+        #         )
+        #         base4_code = f"<img src='data:{f'image/{img_file.type}' if img_file.type in ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'] else 'image/jpeg'};base64,{base64.b64encode(img_file.read()).decode('utf-8')}'>"
+        #
+        #         st.code(base4_code, language="html", wrap_lines=True)
+        #
+        #         pyperclip.copy(str(base4_code))
 
-        with img_left:
-            with st.container(border=True, height=600):
-                st.markdown(
-                    body=f"<h2 style='text-align: center;'>原始图像</h2>",
-                    unsafe_allow_html=True
-                )
-                st.image(img_file)
+        with st.container(border=True, height=280):
+            st.markdown(
+                body=f"<h2 style='text-align: center;'>图像对应的base64编码</h2><br><p style='text-align: center;'>快速三次点击下面的文本可以全选img标签，ctrl+c复制</p>",
+                unsafe_allow_html=True
+            )
+            base4_code = f"<img src='data:{f'image/{img_file.type}' if img_file.type in ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'] else 'image/jpeg'};base64,{base64.b64encode(img_file.read()).decode('utf-8')}'>"
 
-        with img_right:
-            with st.container(border=True, height=600):
-                st.markdown(
-                    body=f"<h2 style='text-align: center;'>对应的base64编码</h2><br><p style='text-align: center;'>快速三次点击文本可以全选img标签</p>",
-                    unsafe_allow_html=True
-                )
-                base4_code = f"<img src='data:{f'image/{img_file.type}' if img_file.type in ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'] else 'image/jpeg'};base64,{base64.b64encode(img_file.read()).decode('utf-8')}'>"
+            st.code(base4_code, language="html", wrap_lines=True)
 
-                st.text(base4_code, )
+            pyperclip.copy(str(base4_code))
 
-                while True:
-                    pyperclip.copy(str(base4_code))
+        with st.container(border=True, height=500):
+            st.markdown(
+                body=f"<h2 style='text-align: center;'>原始图像</h2>",
+                unsafe_allow_html=True
+            )
 
-                    if pyperclip.paste() == str(base4_code):
-                        break
+            _, mid, _ = st.columns([1, 1, 1])
+            with mid:
+                st.image(img_file, use_container_width=True)
 
+with st.expander(label="课程资源（点击展开）", expanded=False):
     # st.image("pic/3D.jpg")
     image_paths = ["pic/3D.jpg", "pic/灯笼.jpg", "pic/笑脸.png"]  # 替换为你的实际图片路径
 
